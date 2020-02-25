@@ -1,4 +1,4 @@
-package com.ds.quicknotes;
+package com.ds.quicknotes.Databases;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -8,6 +8,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import com.ds.quicknotes.Entities.Note;
+import com.ds.quicknotes.Utils.NoteDAO;
 
 //define the entities to be included in this database
 @Database(entities = {Note.class}, version = 1, exportSchema = false)

@@ -1,4 +1,4 @@
-package com.ds.quicknotes;
+package com.ds.quicknotes.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.ds.quicknotes.Entities.Note;
+import com.ds.quicknotes.R;
 
 import java.util.ArrayList;
 import java.util.List;

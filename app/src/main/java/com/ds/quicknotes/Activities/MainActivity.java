@@ -1,4 +1,4 @@
-package com.ds.quicknotes;
+package com.ds.quicknotes.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -8,6 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.ds.quicknotes.Adapters.NoteAdapter;
+import com.ds.quicknotes.Entities.Note;
+import com.ds.quicknotes.ViewModels.NoteViewModel;
+import com.ds.quicknotes.R;
 
 import java.util.List;
 

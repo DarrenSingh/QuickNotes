@@ -1,9 +1,13 @@
-package com.ds.quicknotes;
+package com.ds.quicknotes.Repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+
+import com.ds.quicknotes.Databases.NoteDatabase;
+import com.ds.quicknotes.Entities.Note;
+import com.ds.quicknotes.Utils.NoteDAO;
 
 import java.util.List;
 

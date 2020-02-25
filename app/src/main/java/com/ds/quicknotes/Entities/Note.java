@@ -1,4 +1,4 @@
-package com.ds.quicknotes;
+package com.ds.quicknotes.Entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
