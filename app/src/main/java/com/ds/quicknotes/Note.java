@@ -2,6 +2,7 @@ package com.ds.quicknotes;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 //define the table name for this entity using room standards
@@ -15,6 +16,7 @@ public class Note {
     private String description;
     private int importance;
 
+    @Ignore
     public Note(){
 
     }
