@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-
+//define the table name for this entity using room standards
 @Entity(tableName = "note_table")
 public class Note {
 
