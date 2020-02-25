@@ -13,7 +13,7 @@
 
         <!--    Priority    -->
         <TextView
-            android:id="@+id/text_view_priority"
+            android:id="@+id/text_view_importance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -29,7 +29,7 @@
             android:text="Title"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:maxLines="1"
-            android:layout_toStartOf="@id/text_view_priority"
+            android:layout_toStartOf="@id/text_view_importance"
             android:ellipsize="end"/>
 
         <!--    Description    -->
