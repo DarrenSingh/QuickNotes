@@ -5,4 +5,11 @@
         <item name="2" type="number">2</item>
         <item name="3" type="number">3</item>
     </string-array>
+
+    <string-array name="filterOptions">
+        <item name="importance">Importance (Default)</item>
+        <item name="title">Title</item>
+        <item name="updated">Date Modified</item>
+
+    </string-array>
 </resources>

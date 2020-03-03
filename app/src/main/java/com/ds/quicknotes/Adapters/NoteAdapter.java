@@ -14,7 +14,9 @@ import com.ds.quicknotes.R;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
@@ -35,7 +37,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         Note note = notes.get(position);
 
         StringBuilder importance = new StringBuilder();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, YY");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, YY", Locale.CANADA);
         Timestamp timestamp = new Timestamp(note.getUpdated());
 
         holder.textViewTitle.setText(note.getTitle());
@@ -66,6 +68,24 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         return notes.get(id);
     }
 
+    public void sort(String attribute){
+        switch (attribute){
+            case "Title":
+                this.notes.sort(Comparator.comparing(Note::getTitle));
+                break;
+            case "Date Modified":
+                this.notes.sort(Comparator.comparing(Note::getUpdated));
+                break;
+            case "Importance (Default)":
+                this.notes.sort(Comparator.comparing(Note::getImportance).reversed());
+                break;
+            default:
+                break;
+
+        }
+        notifyDataSetChanged();
+    }
+
     class NoteHolder extends RecyclerView.ViewHolder {
         //item view components
         private TextView textViewTitle;
@@ -74,7 +94,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         private TextView textViewDate;
 
         //default constructor
-        public NoteHolder(@NonNull View itemView) {
+        private NoteHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);

@@ -2,21 +2,30 @@ package com.ds.quicknotes.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+
 import android.widget.Toast;
 
 import com.ds.quicknotes.Adapters.NoteAdapter;
@@ -24,7 +33,6 @@ import com.ds.quicknotes.Entities.Note;
 import com.ds.quicknotes.ViewModels.NoteViewModel;
 import com.ds.quicknotes.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -32,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final static int ADD_NOTE_REQUEST = 1;
     public final static int EDIT_NOTE_REQUEST = 2;
+    String filterOption = null;
 
     //Note ViewModel instance
     private NoteViewModel noteViewModel;
@@ -43,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Start Components
         FloatingActionButton floatingActionButton = findViewById(R.id.btn_add_note);
+        Button filterDialogButton = findViewById(R.id.button_dialog);
 
         //End Components
 
@@ -76,6 +86,27 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,AddNoteActivity.class);
                 startActivityForResult(i,ADD_NOTE_REQUEST);
+            }
+        });
+
+        filterDialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilterDialogFragment dialogFragment = new FilterDialogFragment();
+                dialogFragment.show(getSupportFragmentManager(),"Filter");
+
+                //Instantiate a lifecycle observer to attain the selected value upon FilterDialogFragment destruction
+                dialogFragment.getLifecycle().addObserver(new LifecycleObserver() {
+                    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+                    public void getSelection(){
+                        // check if an item form thw dialog has been selected
+                        if(dialogFragment.returnData() != null){
+
+                        filterOption = dialogFragment.returnData();
+                        onFilterChange(filterOption,noteAdapter);
+                        }
+                    }
+                });
             }
         });
 
@@ -155,4 +186,61 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public void onFilterChange(String newSelection,NoteAdapter adapter){
+        adapter.sort(newSelection);
+    }
+
+    public static class FilterDialogFragment extends DialogFragment implements contract{
+
+        String data;
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
+            Resources res = getResources();
+            String[] options = res.getStringArray(R.array.filterOptions);
+
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Filter Options")
+                    //Set max 3 list item within the dialog menu
+                    .setItems(R.array.filterOptions, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getContext(),"Sorted by " + options[which], Toast.LENGTH_SHORT).show();
+                            data = options[which];
+                        }
+                    })
+                    //define cancel button
+                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+
+        @Override
+        public void onDismiss(@NonNull DialogInterface dialog) {
+            super.onDismiss(dialog);
+        }
+
+        /**
+         * Returns stored value from <code>data</code> selected from the dialog fragment
+         * @return <code>String</code> or <code>null</code> value
+         */
+        @Override
+        public String returnData() {
+            return this.data;
+        }
+    }
+
+    public interface contract{
+        String returnData();
+    }
+
 }
+

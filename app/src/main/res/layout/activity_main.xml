@@ -7,11 +7,37 @@
     android:background="#1D1D1D"
     tools:context=".Activities.MainActivity">
 
+    <Button
+        android:id="@+id/button_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#FFFFFF"
+        android:text="Filter"
+        android:textSize="12sp"
+        android:layout_gravity="end"
+        android:clickable="true"/>
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner_filter"-->
+<!--        style="@android:style/Widget.Material.Light.Spinner"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="32dp"-->
+<!--        android:background="@color/colorPrimaryDark"-->
+<!--        android:entries="@array/filterOptions"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:spinnerMode="dialog"-->
+<!--        android:visibility="visible"-->
+<!--        tools:visibility="visible" />-->
+
     <!--    Notes RecyclerView  -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
         tools:listitem="@layout/item_note" />
     <!--  preview list items from item_note  -->
 
