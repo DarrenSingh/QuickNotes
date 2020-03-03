@@ -7,37 +7,31 @@
     android:background="#1D1D1D"
     tools:context=".Activities.MainActivity">
 
-    <Button
-        android:id="@+id/button_dialog"
+    <TextView
+        android:id="@+id/button_sort"
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:padding="12dp"
         android:layout_marginTop="4dp"
         android:layout_marginRight="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:text="Sort: "
+        android:textSize="16dp"
         android:textColor="#FFFFFF"
-        android:text="Filter"
-        android:textSize="12sp"
-        android:layout_gravity="end"
-        android:clickable="true"/>
-
-<!--    <Spinner-->
-<!--        android:id="@+id/spinner_filter"-->
-<!--        style="@android:style/Widget.Material.Light.Spinner"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="32dp"-->
-<!--        android:background="@color/colorPrimaryDark"-->
-<!--        android:entries="@array/filterOptions"-->
-<!--        android:layout_gravity="end"-->
-<!--        android:spinnerMode="dialog"-->
-<!--        android:visibility="visible"-->
-<!--        tools:visibility="visible" />-->
+        android:drawableEnd="@drawable/ic_sort"
+        android:clickable="true"
+        />
 
     <!--    Notes RecyclerView  -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="54dp"
+        app:layout_anchor="@id/button_sort"
+        app:layout_anchorGravity="bottom"
+        android:layout_gravity="bottom"
+
         tools:listitem="@layout/item_note" />
     <!--  preview list items from item_note  -->
 

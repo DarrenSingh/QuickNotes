@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ds.quicknotes.Adapters.NoteAdapter;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Start Components
         FloatingActionButton floatingActionButton = findViewById(R.id.btn_add_note);
-        Button filterDialogButton = findViewById(R.id.button_dialog);
+        TextView filterDialogButton = findViewById(R.id.button_sort);
 
         //End Components
 
