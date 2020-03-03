@@ -1,9 +1,9 @@
 package com.ds.quicknotes.Entities;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
 
 //define the table name for this entity using room standards
 @Entity(tableName = "note_table")
@@ -14,10 +14,11 @@ public class Note {
     private int id;
     private String title;
     private String description;
+    private Long updated;
     private int importance;
 
     @Ignore
-    public Note(){
+    public Note() {
 
     }
 
@@ -25,6 +26,7 @@ public class Note {
     public Note(int id, String title, String description, int importance) {
         this.id = id;
         this.title = title;
+        this.updated = System.currentTimeMillis();
         this.description = description;
         this.importance = importance;
     }
@@ -32,6 +34,7 @@ public class Note {
     public Note(String title, String description, int importance) {
         this.title = title;
         this.description = description;
+        this.updated = System.currentTimeMillis();
         this.importance = importance;
     }
 
@@ -58,6 +61,14 @@ public class Note {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Long updated) {
+        this.updated = updated;
     }
 
     public int getImportance() {

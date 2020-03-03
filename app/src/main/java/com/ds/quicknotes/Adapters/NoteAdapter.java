@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ds.quicknotes.Entities.Note;
 import com.ds.quicknotes.R;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +33,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     @Override
     public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
         Note note = notes.get(position);
+
         StringBuilder importance = new StringBuilder();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, YY");
+        Timestamp timestamp = new Timestamp(note.getUpdated());
 
         holder.textViewTitle.setText(note.getTitle());
         holder.textViewDescription.setText(note.getDescription());
+        holder.textViewDate.setText(dateFormat.format(timestamp));
+
 
         for (int i = 0; i < note.getImportance(); i++) {
             importance.append('!');
@@ -64,6 +71,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         private TextView textViewTitle;
         private TextView textViewDescription;
         private TextView textViewImportance;
+        private TextView textViewDate;
 
         //default constructor
         public NoteHolder(@NonNull View itemView) {
@@ -71,6 +79,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             textViewImportance = itemView.findViewById(R.id.text_view_importance);
+            textViewDate = itemView.findViewById(R.id.text_view_date);
 
             //set onclick listener to this items view
             itemView.setOnClickListener(new View.OnClickListener() {
