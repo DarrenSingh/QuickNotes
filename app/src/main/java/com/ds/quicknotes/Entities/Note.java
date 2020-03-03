@@ -21,6 +21,14 @@ public class Note {
 
     }
 
+    @Ignore
+    public Note(int id, String title, String description, int importance) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.importance = importance;
+    }
+
     public Note(String title, String description, int importance) {
         this.title = title;
         this.description = description;

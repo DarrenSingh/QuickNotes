@@ -17,13 +17,14 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
     private List<Note> notes = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
     public NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate view to pass to viewholder
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_note,parent,false);
+                .inflate(R.layout.item_note, parent, false);
         return new NoteHolder(itemView);
     }
 
@@ -54,7 +55,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         notifyDataSetChanged();
     }
 
-    class NoteHolder extends RecyclerView.ViewHolder{
+    public Note getNote(int id) {
+        return notes.get(id);
+    }
+
+    class NoteHolder extends RecyclerView.ViewHolder {
         //item view components
         private TextView textViewTitle;
         private TextView textViewDescription;
@@ -66,6 +71,28 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             textViewImportance = itemView.findViewById(R.id.text_view_importance);
+
+            //set onclick listener to this items view
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // obtain the position on the view
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        //obtain the user entry form the list using the click position
+                        listener.onItemClick(notes.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    //define an interface with method so we are forced to implement the method anytime a class uses it
+    public interface OnItemClickListener {
+        void onItemClick(Note note);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }
