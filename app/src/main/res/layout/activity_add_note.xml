@@ -14,6 +14,7 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:hint="Title"
         android:inputType="text" />
 
@@ -24,6 +25,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:hint="Description"
         android:inputType="textMultiLine" />
 
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginStart="24dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
         android:text="Priority:"/>
 
     <Spinner
@@ -47,6 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
         android:layout_gravity="center"
+        android:background="@color/colorFontSecondary"
+        android:textColor="@color/colorDark"
         android:text="Save" />
 
 
